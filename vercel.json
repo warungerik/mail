@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "functions": {
+    "api/*.js": {
+      "runtime": "nodejs20.x",
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/api/generate", "destination": "/api/generate" },
+    { "source": "/api/inbox",    "destination": "/api/inbox"    },
+    { "source": "/api/validate", "destination": "/api/validate" },
+    { "source": "/(.*)",         "destination": "/public/$1"    }
+  ]
+}
