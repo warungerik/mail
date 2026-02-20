@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation — Tempbox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1c1612;
+            --ink2: #5a4e44;
+            --ink3: #9e9187;
+            --paper: #f5f0ea;
+            --paper2: #ede7df;
+            --cream: #faf7f3;
+            --line: rgba(28, 22, 18, 0.08);
+            --amber: #bf6c22;
+            --serif: 'Instrument Serif', serif;
+            --mono: 'DM Mono', monospace;
+            --sans: 'DM Sans', sans-serif;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        header {
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-size: 42px;
+            margin: 0;
+        }
+
+        h2 {
+            font-family: var(--serif);
+            font-size: 28px;
+            margin-top: 40px;
+            color: var(--amber);
+        }
+
+        .endpoint {
+            background: var(--cream);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .method {
+            font-family: var(--mono);
+            font-size: 12px;
+            background: var(--amber);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-right: 10px;
+        }
+
+        .url {
+            font-family: var(--mono);
+            font-size: 14px;
+            color: var(--ink2);
+        }
+
+        pre {
+            background: var(--ink);
+            color: #dcd7d0;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: var(--mono);
+            font-size: 13px;
+        }
+
+        code {
+            font-family: var(--mono);
+            color: var(--amber);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--ink3);
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: var(--amber);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/" class="back-link">Kembali ke Beranda</a>
+        <header>
+            <h1>API Documentation</h1>
+            <p>Integrasikan layanan email sementara <strong>Tempbox</strong> ke dalam aplikasi Anda.</p>
+        </header>
+
+        <section>
+            <h2>Informasi Dasar</h2>
+            <p>Semua request menggunakan method <code>GET</code> dan mengembalikan respons dalam format
+                <code>JSON</code>. CORS diizinkan untuk semua domain.
+            </p>
+            <p><strong>Base URL:</strong> <code>https://tempbox-ivory.vercel.app/api</code></p>
+        </section>
+
+        <section class="endpoint">
+            <span class="method">GET</span> <span class="url">/generate</span>
+            <p>Membuat alamat email acak baru.</p>
+            <pre>{
+  "success": true,
+  "result": {
+    "email": "example@domain.com",
+    "emailStatus": "good",
+    "uptime": 10
+  }
+}</pre>
+        </section>
+
+        <section class="endpoint">
+            <span class="method">GET</span> <span class="url">/inbox?email={email}</span>
+            <p>Mengambil pesan dari inbox.</p>
+            <pre>{
+  "success": true,
+  "result": {
+    "inbox": [
+      {
+        "from": "Sender",
+        "subject": "Hello",
+        "message": "Content here...",
+        "created": "20 Feb 2026 19:00"
+      }
+    ]
+  }
+}</pre>
+        </section>
+
+        <section class="endpoint">
+            <span class="method">GET</span> <span class="url">/validate?email={email}</span>
+            <p>Validasi status aktif domain email.</p>
+        </section>
+
+        <footer
+            style="margin-top: 60px; font-size: 12px; color: var(--ink3); text-align: center; border-top: 1px solid var(--line); padding-top: 20px;">
+            Powered by WARUNGERIK — API Documentation
+        </footer>
+    </div>
+</body>
+
+</html>
