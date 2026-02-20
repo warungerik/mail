@@ -1,8 +1,11 @@
 {
-  "name": "tempbox",
-  "version": "1.0.0",
-  "type": "module",
-  "dependencies": {
-    "cheerio": "^1.0.0"
-  }
+    "name": "tempbox",
+    "version": "1.0.0",
+    "type": "module",
+    "engines": {
+        "node": "20.x"
+    },
+    "dependencies": {
+        "cheerio": "^1.0.0"
+    }
 }
