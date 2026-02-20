@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,34 +8,45 @@
     <meta name="description" content="Generate email sementara gratis. Terima verifikasi tanpa daftar akun.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
-            --ink:       #1c1612;
-            --ink2:      #5a4e44;
-            --ink3:      #9e9187;
-            --ink4:      #c8bfb5;
-            --paper:     #f5f0ea;
-            --paper2:    #ede7df;
-            --paper3:    #e2d9ce;
-            --cream:     #faf7f3;
-            --line:      rgba(28,22,18,0.08);
-            --amber:     #bf6c22;
-            --amber-lt:  rgba(191,108,34,0.10);
-            --amber-br:  rgba(191,108,34,0.25);
-            --green:     #3a6b4a;
-            --green-lt:  rgba(58,107,74,0.10);
-            --green-br:  rgba(58,107,74,0.22);
-            --red:       #8b2e2e;
-            --red-lt:    rgba(139,46,46,0.08);
-            --serif:     'Instrument Serif', Georgia, serif;
-            --mono:      'DM Mono', monospace;
-            --sans:      'DM Sans', sans-serif;
+            --ink: #1c1612;
+            --ink2: #5a4e44;
+            --ink3: #9e9187;
+            --ink4: #c8bfb5;
+            --paper: #f5f0ea;
+            --paper2: #ede7df;
+            --paper3: #e2d9ce;
+            --cream: #faf7f3;
+            --line: rgba(28, 22, 18, 0.08);
+            --amber: #bf6c22;
+            --amber-lt: rgba(191, 108, 34, 0.10);
+            --amber-br: rgba(191, 108, 34, 0.25);
+            --green: #3a6b4a;
+            --green-lt: rgba(58, 107, 74, 0.10);
+            --green-br: rgba(58, 107, 74, 0.22);
+            --red: #8b2e2e;
+            --red-lt: rgba(139, 46, 46, 0.08);
+            --serif: 'Instrument Serif', Georgia, serif;
+            --mono: 'DM Mono', monospace;
+            --sans: 'DM Sans', sans-serif;
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: var(--sans);
@@ -46,467 +58,955 @@
         /* grain */
         body::before {
             content: '';
-            position: fixed; inset: 0; pointer-events: none; z-index: 999;
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 999;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
             opacity: 0.5;
         }
 
-        a { text-decoration: none; color: inherit; }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
         /* ── TOPBAR ── */
         .topbar {
-            position: sticky; top: 0; z-index: 100;
-            height: 52px; background: var(--cream);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: 52px;
+            background: var(--cream);
             border-bottom: 1px solid var(--line);
-            display: flex; align-items: center;
+            display: flex;
+            align-items: center;
         }
+
         .topbar-inner {
-            max-width: 700px; margin: 0 auto; padding: 0 24px;
-            width: 100%; display: flex; align-items: center; justify-content: space-between;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
+
         .logo {
-            display: flex; align-items: baseline; gap: 8px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
         }
-        .logo-word { font-family: var(--serif); font-size: 19px; letter-spacing: -0.02em; color: var(--ink); }
+
+        .logo-word {
+            font-family: var(--serif);
+            font-size: 19px;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+        }
+
         .logo-tag {
-            font-family: var(--mono); font-size: 9px; color: var(--ink3);
-            letter-spacing: 0.08em; text-transform: uppercase;
-            border: 1px solid var(--line); padding: 2px 7px; border-radius: 3px;
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--ink3);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: 1px solid var(--line);
+            padding: 2px 7px;
+            border-radius: 3px;
         }
+
         .topbar-link {
-            font-size: 12.5px; font-weight: 500; color: var(--ink3);
-            padding: 5px 10px; border-radius: 5px; transition: all 0.15s;
+            font-size: 12.5px;
+            font-weight: 500;
+            color: var(--ink3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.15s;
         }
-        .topbar-link:hover { background: var(--paper2); color: var(--ink); }
+
+        .topbar-link:hover {
+            background: var(--paper2);
+            color: var(--ink);
+        }
 
         /* ── PAGE ── */
-        .page { max-width: 700px; margin: 0 auto; padding: 40px 24px 80px; }
+        .page {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
 
         /* ── MASTHEAD ── */
         .masthead {
-            display: flex; align-items: flex-end; justify-content: space-between;
-            gap: 16px; margin-bottom: 28px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 28px;
             animation: fadeUp 0.5s ease both;
         }
-        .kicker {
-            font-family: var(--mono); font-size: 10px; font-weight: 500;
-            letter-spacing: 0.14em; text-transform: uppercase;
-            color: var(--amber); margin-bottom: 8px;
-        }
-        .headline {
-            font-family: var(--serif); font-size: clamp(28px, 5.5vw, 40px);
-            line-height: 1.12; letter-spacing: -0.02em;
-        }
-        .headline em { font-style: italic; color: var(--amber); }
-        .sub { margin-top: 9px; font-size: 13px; color: var(--ink3); max-width: 320px; line-height: 1.65; }
 
-        .counter-wrap { text-align: right; flex-shrink: 0; }
-        .counter-num { font-family: var(--serif); font-size: 44px; line-height: 1; letter-spacing: -0.04em; display: block; }
-        .counter-lbl { font-family: var(--mono); font-size: 9px; color: var(--ink3); letter-spacing: 0.1em; text-transform: uppercase; }
+        .kicker {
+            font-family: var(--mono);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 8px;
+        }
+
+        .headline {
+            font-family: var(--serif);
+            font-size: clamp(28px, 5.5vw, 40px);
+            line-height: 1.12;
+            letter-spacing: -0.02em;
+        }
+
+        .headline em {
+            font-style: italic;
+            color: var(--amber);
+        }
+
+        .sub {
+            margin-top: 9px;
+            font-size: 13px;
+            color: var(--ink3);
+            max-width: 320px;
+            line-height: 1.65;
+        }
+
+        .counter-wrap {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .counter-num {
+            font-family: var(--serif);
+            font-size: 44px;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            display: block;
+        }
+
+        .counter-lbl {
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--ink3);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
 
         /* ── ALERT / NOTICE ── */
         .notice {
-            display: flex; align-items: flex-start; gap: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
             padding: 11px 14px;
-            background: var(--amber-lt); border: 1px solid var(--amber-br);
-            border-radius: 8px; margin-bottom: 16px;
-            font-size: 12.5px; color: var(--amber); line-height: 1.65;
+            background: var(--amber-lt);
+            border: 1px solid var(--amber-br);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 12.5px;
+            color: var(--amber);
+            line-height: 1.65;
             animation: fadeUp 0.5s 0.06s ease both;
         }
-        .notice b { font-weight: 700; }
+
+        .notice b {
+            font-weight: 700;
+        }
 
         /* ── PANEL ── */
         .panel {
-            background: var(--cream); border: 1px solid var(--line);
-            border-radius: 12px; overflow: hidden;
+            background: var(--cream);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            overflow: hidden;
             margin-bottom: 14px;
         }
-        .panel.anim-1 { animation: fadeUp 0.5s 0.08s ease both; }
-        .panel.anim-2 { animation: fadeUp 0.5s 0.14s ease both; }
 
-        .panel-sec { padding: 20px 22px; }
-        .panel-sec + .panel-sec { border-top: 1px solid var(--line); }
-        .panel-tight { padding: 13px 22px; border-top: 1px solid var(--line); }
+        .panel.anim-1 {
+            animation: fadeUp 0.5s 0.08s ease both;
+        }
+
+        .panel.anim-2 {
+            animation: fadeUp 0.5s 0.14s ease both;
+        }
+
+        .panel-sec {
+            padding: 20px 22px;
+        }
+
+        .panel-sec+.panel-sec {
+            border-top: 1px solid var(--line);
+        }
+
+        .panel-tight {
+            padding: 13px 22px;
+            border-top: 1px solid var(--line);
+        }
 
         /* chip label */
         .chip {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-family: var(--mono); font-size: 9.5px; font-weight: 500;
-            letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--mono);
+            font-size: 9.5px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink3);
             margin-bottom: 13px;
         }
-        .cdot { width: 6px; height: 6px; border-radius: 50%; background: var(--ink4); flex-shrink: 0; }
-        .cdot.live { background: var(--green); animation: blink 2s infinite; }
-        .cdot.warn { background: var(--amber); }
-        .cdot.bad  { background: var(--red); }
+
+        .cdot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--ink4);
+            flex-shrink: 0;
+        }
+
+        .cdot.live {
+            background: var(--green);
+            animation: blink 2s infinite;
+        }
+
+        .cdot.warn {
+            background: var(--amber);
+        }
+
+        .cdot.bad {
+            background: var(--red);
+        }
 
         /* email display */
         .email-box {
-            display: flex; align-items: center; gap: 8px;
-            background: var(--paper2); border: 1px solid var(--line);
-            border-radius: 8px; padding: 12px 14px; margin-bottom: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--paper2);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 13px;
             transition: border-color 0.15s;
         }
-        .email-box:hover { border-color: var(--amber-br); }
+
+        .email-box:hover {
+            border-color: var(--amber-br);
+        }
 
         .email-val {
-            flex: 1; min-width: 0; font-family: var(--mono); font-size: 13.5px;
-            font-weight: 500; color: var(--ink);
-            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            flex: 1;
+            min-width: 0;
+            font-family: var(--mono);
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--ink);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
-        .email-val.ph { color: var(--ink4); font-family: var(--sans); font-size: 13px; font-style: italic; font-weight: 400; }
+
+        .email-val.ph {
+            color: var(--ink4);
+            font-family: var(--sans);
+            font-size: 13px;
+            font-style: italic;
+            font-weight: 400;
+        }
 
         .ibtn {
-            width: 30px; height: 30px; border-radius: 6px;
-            border: 1px solid var(--line); background: var(--cream);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 13px; color: var(--ink3); cursor: pointer;
-            transition: all 0.15s; flex-shrink: 0; user-select: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            border: 1px solid var(--line);
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: var(--ink3);
+            cursor: pointer;
+            transition: all 0.15s;
+            flex-shrink: 0;
+            user-select: none;
         }
-        .ibtn:hover { background: var(--paper3); color: var(--ink); border-color: var(--ink4); }
-        .ibtn.ok    { background: var(--green-lt); color: var(--green); border-color: var(--green-br); }
+
+        .ibtn:hover {
+            background: var(--paper3);
+            color: var(--ink);
+            border-color: var(--ink4);
+        }
+
+        .ibtn.ok {
+            background: var(--green-lt);
+            color: var(--green);
+            border-color: var(--green-br);
+        }
 
         /* buttons */
-        .brow { display: flex; gap: 8px; }
+        .brow {
+            display: flex;
+            gap: 8px;
+        }
 
         .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-            padding: 10px 20px; border-radius: 7px; border: none;
-            font-family: var(--sans); font-size: 13px; font-weight: 600;
-            cursor: pointer; transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 10px 20px;
+            border-radius: 7px;
+            border: none;
+            font-family: var(--sans);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
         }
-        .btn-main { flex: 1; background: var(--amber); color: white; box-shadow: 0 2px 8px rgba(191,108,34,0.2); }
-        .btn-main:hover:not(:disabled) { background: #a55d1b; box-shadow: 0 4px 14px rgba(191,108,34,0.3); transform: translateY(-1px); }
-        .btn-main:disabled { background: var(--ink4); box-shadow: none; transform: none; cursor: not-allowed; }
 
-        .btn-ghost { background: var(--paper2); color: var(--ink2); border: 1px solid var(--line); }
-        .btn-ghost:hover { background: var(--paper3); color: var(--ink); }
+        .btn-main {
+            flex: 1;
+            background: var(--amber);
+            color: white;
+            box-shadow: 0 2px 8px rgba(191, 108, 34, 0.2);
+        }
+
+        .btn-main:hover:not(:disabled) {
+            background: #a55d1b;
+            box-shadow: 0 4px 14px rgba(191, 108, 34, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-main:disabled {
+            background: var(--ink4);
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
+        }
+
+        .btn-ghost {
+            background: var(--paper2);
+            color: var(--ink2);
+            border: 1px solid var(--line);
+        }
+
+        .btn-ghost:hover {
+            background: var(--paper3);
+            color: var(--ink);
+        }
 
         /* custom email row */
-        .cust-row { display: flex; align-items: center; gap: 8px; }
-        .cust-lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); flex-shrink: 0; }
-        .cust-input {
-            flex: 1; padding: 8px 12px;
-            border: 1px solid var(--line); border-radius: 7px;
-            background: var(--paper2); font-family: var(--mono); font-size: 12.5px;
-            color: var(--ink); outline: none; transition: all 0.15s;
+        .cust-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .cust-input::placeholder { color: var(--ink4); font-family: var(--sans); font-size: 12px; }
-        .cust-input:focus { border-color: var(--amber-br); box-shadow: 0 0 0 3px var(--amber-lt); }
+
+        .cust-lbl {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink3);
+            flex-shrink: 0;
+        }
+
+        .cust-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: var(--paper2);
+            font-family: var(--mono);
+            font-size: 12.5px;
+            color: var(--ink);
+            outline: none;
+            transition: all 0.15s;
+        }
+
+        .cust-input::placeholder {
+            color: var(--ink4);
+            font-family: var(--sans);
+            font-size: 12px;
+        }
+
+        .cust-input:focus {
+            border-color: var(--amber-br);
+            box-shadow: 0 0 0 3px var(--amber-lt);
+        }
 
         /* ── INBOX ── */
         .inbox-head {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 14px 22px; border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 22px;
+            border-bottom: 1px solid var(--line);
             background: var(--paper);
         }
-        .inbox-head-l { display: flex; align-items: center; gap: 10px; }
-        .inbox-title { font-family: var(--serif); font-size: 17px; letter-spacing: -0.02em; }
+
+        .inbox-head-l {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .inbox-title {
+            font-family: var(--serif);
+            font-size: 17px;
+            letter-spacing: -0.02em;
+        }
+
         .mbadge {
-            font-family: var(--mono); font-size: 10px;
-            background: var(--amber-lt); color: var(--amber);
-            border: 1px solid var(--amber-br); padding: 2px 8px; border-radius: 4px;
+            font-family: var(--mono);
+            font-size: 10px;
+            background: var(--amber-lt);
+            color: var(--amber);
+            border: 1px solid var(--amber-br);
+            padding: 2px 8px;
+            border-radius: 4px;
         }
 
         /* countdown ring */
-        .ring-wrap { display: flex; align-items: center; gap: 7px; cursor: pointer; }
-        .ring-wrap svg { width: 22px; height: 22px; transform: rotate(-90deg); }
-        .ring-wrap svg circle { fill: none; stroke: var(--paper3); stroke-width: 2.2; }
-        .ring-wrap svg .prog { stroke: var(--amber); stroke-linecap: round; stroke-dasharray: 56.5; transition: stroke-dashoffset 1s linear; }
-        .ring-wrap svg .prog.paused { stroke: var(--ink4); }
-        .ring-lbl { font-family: var(--mono); font-size: 10.5px; color: var(--ink3); min-width: 20px; }
+        .ring-wrap {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            cursor: pointer;
+        }
 
-        .inbox-ctrl { display: flex; align-items: center; gap: 10px; }
+        .ring-wrap svg {
+            width: 22px;
+            height: 22px;
+            transform: rotate(-90deg);
+        }
+
+        .ring-wrap svg circle {
+            fill: none;
+            stroke: var(--paper3);
+            stroke-width: 2.2;
+        }
+
+        .ring-wrap svg .prog {
+            stroke: var(--amber);
+            stroke-linecap: round;
+            stroke-dasharray: 56.5;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .ring-wrap svg .prog.paused {
+            stroke: var(--ink4);
+        }
+
+        .ring-lbl {
+            font-family: var(--mono);
+            font-size: 10.5px;
+            color: var(--ink3);
+            min-width: 20px;
+        }
+
+        .inbox-ctrl {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
         /* inbox body */
-        .inbox-body { padding: 16px; }
+        .inbox-body {
+            padding: 16px;
+        }
 
         /* uptime row */
         .uprow {
-            display: none; align-items: center; justify-content: space-between;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
             padding: 8px 12px;
-            background: var(--paper2); border: 1px solid var(--line);
-            border-radius: 7px; margin-bottom: 12px;
-            font-family: var(--mono); font-size: 10.5px; color: var(--ink3);
+            background: var(--paper2);
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            margin-bottom: 12px;
+            font-family: var(--mono);
+            font-size: 10.5px;
+            color: var(--ink3);
         }
-        .uprow.show { display: flex; }
-        .uprow-l { display: flex; align-items: center; gap: 7px; }
+
+        .uprow.show {
+            display: flex;
+        }
+
+        .uprow-l {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
 
         /* states */
         .istate {
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: center; padding: 48px 20px; text-align: center; gap: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 20px;
+            text-align: center;
+            gap: 8px;
         }
-        .istate-glyph { font-family: var(--serif); font-size: 52px; line-height: 1; color: var(--ink4); font-style: italic; }
-        .istate-t { font-size: 14px; font-weight: 600; color: var(--ink2); }
-        .istate-s { font-size: 12.5px; color: var(--ink3); }
 
-        .ldots { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 40px; color: var(--ink3); font-size: 13px; }
-        .ldots-anim { display: flex; gap: 4px; }
-        .ldots-anim span { width: 5px; height: 5px; background: var(--amber); border-radius: 50%; animation: dotpulse 1.2s infinite; }
-        .ldots-anim span:nth-child(2) { animation-delay: 0.2s; }
-        .ldots-anim span:nth-child(3) { animation-delay: 0.4s; }
+        .istate-glyph {
+            font-family: var(--serif);
+            font-size: 52px;
+            line-height: 1;
+            color: var(--ink4);
+            font-style: italic;
+        }
+
+        .istate-t {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink2);
+        }
+
+        .istate-s {
+            font-size: 12.5px;
+            color: var(--ink3);
+        }
+
+        .ldots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 40px;
+            color: var(--ink3);
+            font-size: 13px;
+        }
+
+        .ldots-anim {
+            display: flex;
+            gap: 4px;
+        }
+
+        .ldots-anim span {
+            width: 5px;
+            height: 5px;
+            background: var(--amber);
+            border-radius: 50%;
+            animation: dotpulse 1.2s infinite;
+        }
+
+        .ldots-anim span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .ldots-anim span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
 
         /* message cards */
-        #msg-list { display: flex; flex-direction: column; gap: 8px; }
+        #msg-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
         .mcard {
-            background: var(--paper); border: 1px solid var(--line);
-            border-radius: 8px; overflow: hidden; transition: border-color 0.15s;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.15s;
         }
-        .mcard:hover { border-color: var(--amber-br); }
+
+        .mcard:hover {
+            border-color: var(--amber-br);
+        }
 
         .mtop {
-            display: flex; gap: 12px; align-items: flex-start;
-            padding: 13px 16px; cursor: pointer; user-select: none;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 13px 16px;
+            cursor: pointer;
+            user-select: none;
         }
+
         .mavatar {
-            width: 34px; height: 34px; border-radius: 50%;
-            background: var(--paper3); border: 1px solid var(--line);
-            display: flex; align-items: center; justify-content: center;
-            font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--amber);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--paper3);
+            border: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--serif);
+            font-size: 16px;
+            font-style: italic;
+            color: var(--amber);
             flex-shrink: 0;
         }
-        .minfo { flex: 1; min-width: 0; }
-        .msubj { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .mmeta { font-family: var(--mono); font-size: 10.5px; color: var(--ink3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .mright { text-align: right; flex-shrink: 0; }
-        .mtime { font-family: var(--mono); font-size: 10px; color: var(--ink4); display: block; margin-bottom: 4px; }
-        .mchev { font-size: 9px; color: var(--ink4); display: inline-block; transition: transform 0.2s; }
-        .mcard.open .mchev { transform: rotate(180deg); }
+
+        .minfo {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .msubj {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .mmeta {
+            font-family: var(--mono);
+            font-size: 10.5px;
+            color: var(--ink3);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .mright {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .mtime {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--ink4);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .mchev {
+            font-size: 9px;
+            color: var(--ink4);
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        .mcard.open .mchev {
+            transform: rotate(180deg);
+        }
 
         .mbody {
             display: none;
-            padding: 14px 16px; border-top: 1px solid var(--line);
-            font-family: var(--mono); font-size: 12.5px; color: var(--ink2);
-            line-height: 1.8; white-space: pre-wrap; word-break: break-word;
+            padding: 14px 16px;
+            border-top: 1px solid var(--line);
+            font-family: var(--mono);
+            font-size: 12.5px;
+            color: var(--ink2);
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-break: break-word;
             background: var(--paper2);
         }
-        .mbody.open { display: block; animation: fadeDown 0.2s ease; }
+
+        .mbody.open {
+            display: block;
+            animation: fadeDown 0.2s ease;
+        }
 
         /* ── ANIMATIONS ── */
-        @keyframes fadeUp   { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeDown { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes blink    { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
-        @keyframes dotpulse { 0%,80%,100% { transform: scale(0.5); opacity: 0.3; } 40% { transform: scale(1); opacity: 1; } }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.25;
+            }
+        }
+
+        @keyframes dotpulse {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.5);
+                opacity: 0.3;
+            }
+
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 500px) {
-            .page { padding: 24px 14px 60px; }
-            .masthead { flex-direction: column; align-items: flex-start; }
-            .counter-wrap { display: none; }
-            .cust-lbl { display: none; }
-            .topbar-link { display: none; }
+            .page {
+                padding: 24px 14px 60px;
+            }
+
+            .masthead {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .counter-wrap {
+                display: none;
+            }
+
+            .cust-lbl {
+                display: none;
+            }
+
+            .topbar-link {
+                display: none;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<header class="topbar">
-    <div class="topbar-inner">
-        <div class="logo">
-            <span class="logo-word">Tempbox</span>
-            <span class="logo-tag">gratis · tanpa daftar</span>
-        </div>
-        <a href="/" class="topbar-link">← Beranda</a>
-    </div>
-</header>
-
-<main class="page">
-
-    <!-- Masthead -->
-    <div class="masthead">
-        <div>
-            <div class="kicker">✦ Temporary Email</div>
-            <h1 class="headline">Email <em>sekali pakai,</em><br>tanpa registrasi.</h1>
-            <p class="sub">Generate email sementara, terima verifikasi, buang. Privasi terjaga, gratis selamanya.</p>
-        </div>
-        <div class="counter-wrap">
-            <span class="counter-num" id="stat-count">0</span>
-            <span class="counter-lbl">pesan diterima</span>
-        </div>
-    </div>
-
-    <!-- Notice -->
-    <div class="notice">
-        ◆ &nbsp;<div>Powered by <b>generator.email</b>. Email bersifat sementara dan akan kadaluarsa. Jangan gunakan untuk data penting.</div>
-    </div>
-
-    <!-- Email Panel -->
-    <div class="panel anim-1">
-        <div class="panel-sec">
-            <div class="chip">
-                <div class="cdot" id="cdot"></div>
-                <span id="ctext">Belum aktif</span>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="logo">
+                <span class="logo-word">Tempbox</span>
             </div>
+            <a href="/" class="topbar-link">Beranda</a>
+        </div>
+    </header>
 
-            <div class="email-box">
-                <span class="email-val ph" id="email-val">Klik Generate untuk membuat email...</span>
-                <button class="ibtn" id="btn-copy" onclick="copyEmail()" title="Salin">⎘</button>
-                <button class="ibtn" id="btn-del"  onclick="clearSess()" title="Hapus sesi">✕</button>
+    <main class="page">
+
+        <!-- Masthead -->
+        <div class="masthead">
+            <div>
+                <div class="kicker">Tempbox Email</div>
+                <h1 class="headline">Email <em>sekali pakai,</em><br>tanpa registrasi.</h1>
+                <p class="sub">Generate email sementara, terima verifikasi, buang. Privasi terjaga, gratis selamanya.
+                </p>
             </div>
-
-            <div class="brow">
-                <button class="btn btn-main" id="btn-gen" onclick="doGenerate()">
-                    ✦ &nbsp;Generate Email Baru
-                </button>
+            <div class="counter-wrap">
+                <span class="counter-num" id="stat-count">0</span>
+                <span class="counter-lbl">pesan diterima</span>
             </div>
         </div>
 
-        <div class="panel-tight">
-            <div class="cust-row">
-                <span class="cust-lbl">Custom:</span>
-                <input class="cust-input" id="cust-in" type="text" placeholder="Masukkan email kustom lalu Enter...">
-                <button class="btn btn-ghost" onclick="doCustom()" style="padding:8px 14px;font-size:12px;flex-shrink:0">Cek →</button>
-            </div>
+        <!-- Notice -->
+        <div class="notice">
+            &nbsp;<div>Powered by <b>WARUNGERIK</b></div>
         </div>
-    </div>
 
-    <!-- Inbox Panel -->
-    <div class="panel anim-2">
-        <div class="inbox-head">
-            <div class="inbox-head-l">
-                <span class="inbox-title">Inbox</span>
-                <span class="mbadge" id="mbadge">0 pesan</span>
-            </div>
-            <div class="inbox-ctrl">
-                <div class="ring-wrap" onclick="toggleAuto()" title="Pause/resume auto-refresh">
-                    <svg viewBox="0 0 20 20">
-                        <circle cx="10" cy="10" r="9"/>
-                        <circle class="prog" id="ring-prog" cx="10" cy="10" r="9"/>
-                    </svg>
-                    <span class="ring-lbl" id="ring-lbl">10s</span>
+        <!-- Email Panel -->
+        <div class="panel anim-1">
+            <div class="panel-sec">
+                <div class="chip">
+                    <div class="cdot" id="cdot"></div>
+                    <span id="ctext">Belum aktif</span>
                 </div>
-                <button class="btn btn-ghost" id="btn-ref" onclick="doRefresh()" style="padding:7px 13px;font-size:12px;">↻ Refresh</button>
-            </div>
-        </div>
 
-        <div class="inbox-body">
-            <div class="uprow" id="uprow">
-                <div class="uprow-l">
-                    <div class="cdot live"></div>
-                    <span id="uptext">—</span>
+                <div class="email-box">
+                    <span class="email-val ph" id="email-val">Klik Generate untuk membuat email...</span>
+                    <button class="ibtn" id="btn-copy" onclick="copyEmail()" title="Salin">⎘</button>
+                    <button class="ibtn" id="btn-del" onclick="clearSess()" title="Hapus sesi">✕</button>
                 </div>
-                <span id="upstatus">—</span>
+
+                <div class="brow">
+                    <button class="btn btn-main" id="btn-gen" onclick="doGenerate()">
+                        &nbsp;Generate Email Baru
+                    </button>
+                </div>
             </div>
 
-            <div id="msg-list">
-                <div class="istate">
-                    <div class="istate-glyph">∅</div>
-                    <div class="istate-t">Inbox kosong</div>
-                    <div class="istate-s">Generate email dulu, lalu tunggu pesan masuk.</div>
+            <div class="panel-tight">
+                <div class="cust-row">
+                    <span class="cust-lbl">Custom:</span>
+                    <input class="cust-input" id="cust-in" type="text"
+                        placeholder="Masukkan email kustom lalu Enter...">
+                    <button class="btn btn-ghost" onclick="doCustom()"
+                        style="padding:8px 14px;font-size:12px;flex-shrink:0">Cek</button>
                 </div>
             </div>
         </div>
-    </div>
 
-</main>
+        <!-- Inbox Panel -->
+        <div class="panel anim-2">
+            <div class="inbox-head">
+                <div class="inbox-head-l">
+                    <span class="inbox-title">Inbox</span>
+                    <span class="mbadge" id="mbadge">0 pesan</span>
+                </div>
+                <div class="inbox-ctrl">
+                    <div class="ring-wrap" onclick="toggleAuto()" title="Pause/resume auto-refresh">
+                        <svg viewBox="0 0 20 20">
+                            <circle cx="10" cy="10" r="9" />
+                            <circle class="prog" id="ring-prog" cx="10" cy="10" r="9" />
+                        </svg>
+                        <span class="ring-lbl" id="ring-lbl">10s</span>
+                    </div>
+                    <button class="btn btn-ghost" id="btn-ref" onclick="doRefresh()"
+                        style="padding:7px 13px;font-size:12px;">Refresh</button>
+                </div>
+            </div>
 
-<script>
-// ─── STATE ────────────────────────────────────────────────────────────────────
-const BASE = '';   // Vercel: API ada di /api/...
-let email  = '';
-let autoOn = true;
-let tick   = 10;
-let tickT  = null;
-const CIRC = 2 * Math.PI * 9;   // r=9 → C≈56.5
+            <div class="inbox-body">
+                <div class="uprow" id="uprow">
+                    <div class="uprow-l">
+                        <div class="cdot live"></div>
+                        <span id="uptext">—</span>
+                    </div>
+                    <span id="upstatus">—</span>
+                </div>
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-    const saved = localStorage.getItem('tb_email');
-    if (saved) { setEmail(saved); doRefresh(); }
-    startTick();
+                <div id="msg-list">
+                    <div class="istate">
+                        <div class="istate-glyph">∅</div>
+                        <div class="istate-t">Inbox kosong</div>
+                        <div class="istate-s">Generate email dulu, lalu tunggu pesan masuk.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    document.getElementById('cust-in').addEventListener('keydown', e => {
-        if (e.key === 'Enter') doCustom();
-    });
-});
+    </main>
 
-// ─── API CALLS ────────────────────────────────────────────────────────────────
-async function doGenerate() {
-    const btn = document.getElementById('btn-gen');
-    btn.disabled = true;
-    btn.textContent = 'Generating…';
+    <script>
+        // ─── STATE ────────────────────────────────────────────────────────────────────
+        const BASE = '';   // Vercel: API ada di /api/...
+        let email = '';
+        let autoOn = true;
+        let tick = 10;
+        let tickT = null;
+        const CIRC = 2 * Math.PI * 9;   // r=9 → C≈56.5
 
-    try {
-        const r = await fetch(`${BASE}/api/generate`);
-        const d = await r.json();
-        if (d.success && d.result?.email) {
-            setEmail(d.result.email);
-            localStorage.setItem('tb_email', d.result.email);
-            applyMeta(d.result.emailStatus, d.result.uptime);
+        // ─── INIT ─────────────────────────────────────────────────────────────────────
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('tb_email');
+            if (saved) { setEmail(saved); doRefresh(); }
+            startTick();
+
+            document.getElementById('cust-in').addEventListener('keydown', e => {
+                if (e.key === 'Enter') doCustom();
+            });
+        });
+
+        // ─── API CALLS ────────────────────────────────────────────────────────────────
+        async function doGenerate() {
+            const btn = document.getElementById('btn-gen');
+            btn.disabled = true;
+            btn.textContent = 'Generating…';
+
+            try {
+                const r = await fetch(`${BASE}/api/generate`);
+                const d = await r.json();
+                if (d.success && d.result?.email) {
+                    setEmail(d.result.email);
+                    localStorage.setItem('tb_email', d.result.email);
+                    applyMeta(d.result.emailStatus, d.result.uptime);
+                    await doRefresh();
+                } else {
+                    setChip('bad', 'Gagal: ' + (d.result || 'coba lagi'));
+                }
+            } catch (e) { setChip('bad', 'Error koneksi'); }
+
+            btn.disabled = false;
+            btn.innerHTML = '✦ &nbsp;Generate Email Baru';
+        }
+
+        async function doCustom() {
+            const val = document.getElementById('cust-in').value.trim();
+            if (!val || !val.includes('@')) { alert('Masukkan email valid (contoh: nama@domain.com)'); return; }
+            setEmail(val);
+            localStorage.setItem('tb_email', val);
+            document.getElementById('cust-in').value = '';
+            try {
+                const r = await fetch(`${BASE}/api/validate?email=${encodeURIComponent(val)}`);
+                const d = await r.json();
+                if (d.success && d.result) applyMeta(d.result.emailStatus, d.result.uptime);
+            } catch (_) { }
             await doRefresh();
-        } else {
-            setChip('bad', 'Gagal: ' + (d.result || 'coba lagi'));
         }
-    } catch (e) { setChip('bad', 'Error koneksi'); }
 
-    btn.disabled = false;
-    btn.innerHTML = '✦ &nbsp;Generate Email Baru';
-}
+        async function doRefresh() {
+            if (!email) return;
 
-async function doCustom() {
-    const val = document.getElementById('cust-in').value.trim();
-    if (!val || !val.includes('@')) { alert('Masukkan email valid (contoh: nama@domain.com)'); return; }
-    setEmail(val);
-    localStorage.setItem('tb_email', val);
-    document.getElementById('cust-in').value = '';
-    try {
-        const r = await fetch(`${BASE}/api/validate?email=${encodeURIComponent(val)}`);
-        const d = await r.json();
-        if (d.success && d.result) applyMeta(d.result.emailStatus, d.result.uptime);
-    } catch (_) {}
-    await doRefresh();
-}
+            const btn = document.getElementById('btn-ref');
+            btn.textContent = '…';
+            showLoad();
 
-async function doRefresh() {
-    if (!email) return;
+            try {
+                const r = await fetch(`${BASE}/api/inbox?email=${encodeURIComponent(email)}`);
+                const d = await r.json();
+                if (d.success && d.result) {
+                    applyMeta(d.result.emailStatus, d.result.uptime);
+                    renderMsgs(d.result.inbox || []);
+                } else {
+                    showErr('Gagal memuat inbox.');
+                }
+            } catch (e) {
+                showErr('Error: ' + e.message);
+            }
 
-    const btn = document.getElementById('btn-ref');
-    btn.textContent = '…';
-    showLoad();
-
-    try {
-        const r = await fetch(`${BASE}/api/inbox?email=${encodeURIComponent(email)}`);
-        const d = await r.json();
-        if (d.success && d.result) {
-            applyMeta(d.result.emailStatus, d.result.uptime);
-            renderMsgs(d.result.inbox || []);
-        } else {
-            showErr('Gagal memuat inbox.');
+            btn.textContent = '↻ Refresh';
+            resetTick();
         }
-    } catch (e) {
-        showErr('Error: ' + e.message);
-    }
 
-    btn.textContent = '↻ Refresh';
-    resetTick();
-}
+        // ─── RENDER ───────────────────────────────────────────────────────────────────
+        function renderMsgs(msgs) {
+            const list = document.getElementById('msg-list');
+            const badge = document.getElementById('mbadge');
+            badge.textContent = msgs.length + ' pesan';
+            document.getElementById('stat-count').textContent = msgs.length;
 
-// ─── RENDER ───────────────────────────────────────────────────────────────────
-function renderMsgs(msgs) {
-    const list  = document.getElementById('msg-list');
-    const badge = document.getElementById('mbadge');
-    badge.textContent = msgs.length + ' pesan';
-    document.getElementById('stat-count').textContent = msgs.length;
-
-    if (!msgs.length) {
-        list.innerHTML = `<div class="istate">
+            if (!msgs.length) {
+                list.innerHTML = `<div class="istate">
             <div class="istate-glyph">○</div>
             <div class="istate-t">Belum ada pesan</div>
             <div class="istate-s">Inbox diperbarui otomatis setiap 10 detik.</div>
         </div>`;
-        return;
-    }
+                return;
+            }
 
-    list.innerHTML = '';
-    msgs.forEach((msg, i) => {
-        const ini  = ((msg.from || '?').match(/[a-zA-Z]/) ? msg.from.match(/[a-zA-Z]/)[0] : '?').toUpperCase();
-        const time = msg.created ? fmtDate(msg.created) : '';
-        const card = document.createElement('div');
-        card.className = 'mcard';
-        card.style.animation = `fadeUp 0.25s ease ${i * 0.06}s both`;
-        card.innerHTML = `
+            list.innerHTML = '';
+            msgs.forEach((msg, i) => {
+                const ini = ((msg.from || '?').match(/[a-zA-Z]/) ? msg.from.match(/[a-zA-Z]/)[0] : '?').toUpperCase();
+                const time = msg.created ? fmtDate(msg.created) : '';
+                const card = document.createElement('div');
+                card.className = 'mcard';
+                card.style.animation = `fadeUp 0.25s ease ${i * 0.06}s both`;
+                card.innerHTML = `
             <div class="mtop" onclick="toggleMsg(this)">
                 <div class="mavatar">${esc(ini)}</div>
                 <div class="minfo">
@@ -520,137 +1020,138 @@ function renderMsgs(msgs) {
             </div>
             <div class="mbody">${esc(msg.message || '(pesan kosong)')}</div>
         `;
-        list.appendChild(card);
-    });
-}
-
-function toggleMsg(h) {
-    const c = h.parentElement;
-    const b = c.querySelector('.mbody');
-    const o = c.classList.toggle('open');
-    b.classList.toggle('open', o);
-}
-
-// ─── AUTO REFRESH (countdown ring) ───────────────────────────────────────────
-function startTick() { resetTick(); }
-
-function resetTick() {
-    tick = 10;
-    if (tickT) clearInterval(tickT);
-    const prog = document.getElementById('ring-prog');
-    const lbl  = document.getElementById('ring-lbl');
-    prog.style.strokeDashoffset = 0;
-
-    if (!autoOn) return;
-
-    tickT = setInterval(() => {
-        tick--;
-        lbl.textContent = tick + 's';
-        prog.style.strokeDashoffset = CIRC * (1 - tick / 10);
-        if (tick <= 0) {
-            clearInterval(tickT);
-            if (email) doRefresh();
-            else resetTick();
+                list.appendChild(card);
+            });
         }
-    }, 1000);
-}
 
-function toggleAuto() {
-    autoOn = !autoOn;
-    const prog = document.getElementById('ring-prog');
-    const lbl  = document.getElementById('ring-lbl');
-    if (!autoOn) {
-        clearInterval(tickT);
-        prog.classList.add('paused');
-        lbl.textContent = '‖';
-    } else {
-        prog.classList.remove('paused');
-        resetTick();
-    }
-}
+        function toggleMsg(h) {
+            const c = h.parentElement;
+            const b = c.querySelector('.mbody');
+            const o = c.classList.toggle('open');
+            b.classList.toggle('open', o);
+        }
 
-// ─── HELPERS ─────────────────────────────────────────────────────────────────
-function setEmail(em) {
-    email = em;
-    const el = document.getElementById('email-val');
-    el.textContent = em;
-    el.classList.remove('ph');
-}
+        // ─── AUTO REFRESH (countdown ring) ───────────────────────────────────────────
+        function startTick() { resetTick(); }
 
-function applyMeta(status, uptime) {
-    if (status) setChip(status === 'good' ? 'live' : 'warn', status === 'good' ? 'Aktif' : status);
-    if (uptime) {
-        const row = document.getElementById('uprow');
-        row.classList.add('show');
-        document.getElementById('uptext').textContent   = 'Uptime: ' + uptime + ' menit';
-        document.getElementById('upstatus').textContent = status || '—';
-    }
-}
+        function resetTick() {
+            tick = 10;
+            if (tickT) clearInterval(tickT);
+            const prog = document.getElementById('ring-prog');
+            const lbl = document.getElementById('ring-lbl');
+            prog.style.strokeDashoffset = 0;
 
-function setChip(cls, txt) {
-    document.getElementById('cdot').className  = 'cdot ' + cls;
-    document.getElementById('ctext').textContent = txt;
-}
+            if (!autoOn) return;
 
-function showLoad() {
-    document.getElementById('msg-list').innerHTML = `
+            tickT = setInterval(() => {
+                tick--;
+                lbl.textContent = tick + 's';
+                prog.style.strokeDashoffset = CIRC * (1 - tick / 10);
+                if (tick <= 0) {
+                    clearInterval(tickT);
+                    if (email) doRefresh();
+                    else resetTick();
+                }
+            }, 1000);
+        }
+
+        function toggleAuto() {
+            autoOn = !autoOn;
+            const prog = document.getElementById('ring-prog');
+            const lbl = document.getElementById('ring-lbl');
+            if (!autoOn) {
+                clearInterval(tickT);
+                prog.classList.add('paused');
+                lbl.textContent = '‖';
+            } else {
+                prog.classList.remove('paused');
+                resetTick();
+            }
+        }
+
+        // ─── HELPERS ─────────────────────────────────────────────────────────────────
+        function setEmail(em) {
+            email = em;
+            const el = document.getElementById('email-val');
+            el.textContent = em;
+            el.classList.remove('ph');
+        }
+
+        function applyMeta(status, uptime) {
+            if (status) setChip(status === 'good' ? 'live' : 'warn', status === 'good' ? 'Aktif' : status);
+            if (uptime) {
+                const row = document.getElementById('uprow');
+                row.classList.add('show');
+                document.getElementById('uptext').textContent = 'Uptime: ' + uptime + ' menit';
+                document.getElementById('upstatus').textContent = status || '—';
+            }
+        }
+
+        function setChip(cls, txt) {
+            document.getElementById('cdot').className = 'cdot ' + cls;
+            document.getElementById('ctext').textContent = txt;
+        }
+
+        function showLoad() {
+            document.getElementById('msg-list').innerHTML = `
         <div class="ldots">
             <div class="ldots-anim"><span></span><span></span><span></span></div>
             mengambil pesan…
         </div>`;
-}
+        }
 
-function showErr(msg) {
-    document.getElementById('msg-list').innerHTML = `
+        function showErr(msg) {
+            document.getElementById('msg-list').innerHTML = `
         <div class="istate">
             <div class="istate-glyph" style="color:var(--red)">!</div>
             <div class="istate-t">Terjadi kesalahan</div>
             <div class="istate-s">${esc(msg)}</div>
         </div>`;
-}
+        }
 
-function copyEmail() {
-    if (!email) return;
-    const btn = document.getElementById('btn-copy');
-    navigator.clipboard.writeText(email).then(() => {
-        btn.classList.add('ok'); btn.textContent = '✓';
-        setTimeout(() => { btn.classList.remove('ok'); btn.textContent = '⎘'; }, 2000);
-    });
-}
+        function copyEmail() {
+            if (!email) return;
+            const btn = document.getElementById('btn-copy');
+            navigator.clipboard.writeText(email).then(() => {
+                btn.classList.add('ok'); btn.textContent = '✓';
+                setTimeout(() => { btn.classList.remove('ok'); btn.textContent = '⎘'; }, 2000);
+            });
+        }
 
-function clearSess() {
-    if (!confirm('Hapus email sesi ini?')) return;
-    email = '';
-    localStorage.removeItem('tb_email');
-    const el = document.getElementById('email-val');
-    el.textContent = 'Klik Generate untuk membuat email...';
-    el.classList.add('ph');
-    setChip('', 'Belum aktif');
-    document.getElementById('cdot').className = 'cdot';
-    document.getElementById('uprow').classList.remove('show');
-    document.getElementById('mbadge').textContent = '0 pesan';
-    document.getElementById('stat-count').textContent = '0';
-    document.getElementById('msg-list').innerHTML = `
+        function clearSess() {
+            if (!confirm('Hapus email sesi ini?')) return;
+            email = '';
+            localStorage.removeItem('tb_email');
+            const el = document.getElementById('email-val');
+            el.textContent = 'Klik Generate untuk membuat email...';
+            el.classList.add('ph');
+            setChip('', 'Belum aktif');
+            document.getElementById('cdot').className = 'cdot';
+            document.getElementById('uprow').classList.remove('show');
+            document.getElementById('mbadge').textContent = '0 pesan';
+            document.getElementById('stat-count').textContent = '0';
+            document.getElementById('msg-list').innerHTML = `
         <div class="istate">
             <div class="istate-glyph">∅</div>
             <div class="istate-t">Inbox kosong</div>
             <div class="istate-s">Generate email dulu, lalu tunggu pesan masuk.</div>
         </div>`;
-}
+        }
 
-function fmtDate(s) {
-    try {
-        const d = new Date(s.replace(' ', 'T'));
-        return d.toLocaleDateString('id-ID', { day:'2-digit', month:'short' }) + ' ' +
-               d.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
-    } catch { return s; }
-}
+        function fmtDate(s) {
+            try {
+                const d = new Date(s.replace(' ', 'T'));
+                return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }) + ' ' +
+                    d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            } catch { return s; }
+        }
 
-function esc(s) {
-    const d = document.createElement('div');
-    d.textContent = String(s ?? '');
-    return d.innerHTML;
-}
-</script>
+        function esc(s) {
+            const d = document.createElement('div');
+            d.textContent = String(s ?? '');
+            return d.innerHTML;
+        }
+    </script>
 </body>
+
 </html>
