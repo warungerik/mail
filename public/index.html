@@ -262,7 +262,6 @@
 
         .cdot.live {
             background: var(--green);
-            animation: blink 2s infinite;
         }
 
         .cdot.warn {
@@ -461,44 +460,6 @@
             border: 1px solid var(--amber-br);
             padding: 2px 8px;
             border-radius: 4px;
-        }
-
-        /* countdown ring */
-        .ring-wrap {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            cursor: pointer;
-        }
-
-        .ring-wrap svg {
-            width: 22px;
-            height: 22px;
-            transform: rotate(-90deg);
-        }
-
-        .ring-wrap svg circle {
-            fill: none;
-            stroke: var(--paper3);
-            stroke-width: 2.2;
-        }
-
-        .ring-wrap svg .prog {
-            stroke: var(--amber);
-            stroke-linecap: round;
-            stroke-dasharray: 56.5;
-            transition: stroke-dashoffset 1s linear;
-        }
-
-        .ring-wrap svg .prog.paused {
-            stroke: var(--ink4);
-        }
-
-        .ring-lbl {
-            font-family: var(--mono);
-            font-size: 10.5px;
-            color: var(--ink3);
-            min-width: 20px;
         }
 
         .inbox-ctrl {
@@ -733,18 +694,6 @@
             }
         }
 
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.25;
-            }
-        }
-
         @keyframes dotpulse {
 
             0%,
@@ -856,13 +805,6 @@
                     <span class="mbadge" id="mbadge">0 pesan</span>
                 </div>
                 <div class="inbox-ctrl">
-                    <div class="ring-wrap" onclick="toggleAuto()" title="Pause/resume auto-refresh">
-                        <svg viewBox="0 0 20 20">
-                            <circle cx="10" cy="10" r="9" />
-                            <circle class="prog" id="ring-prog" cx="10" cy="10" r="9" />
-                        </svg>
-                        <span class="ring-lbl" id="ring-lbl">10s</span>
-                    </div>
                     <button class="btn btn-ghost" id="btn-ref" onclick="doRefresh()"
                         style="padding:7px 13px;font-size:12px;">Refresh</button>
                 </div>
@@ -881,7 +823,7 @@
                     <div class="istate">
                         <div class="istate-glyph">∅</div>
                         <div class="istate-t">Inbox kosong</div>
-                        <div class="istate-s">Generate email dulu, lalu tunggu pesan masuk.</div>
+                        <div class="istate-s">Klik refresh manual untuk mengecek pesan masuk.</div>
                     </div>
                 </div>
             </div>
@@ -924,16 +866,11 @@
         // ─── STATE ────────────────────────────────────────────────────────────────────
         const BASE = '';   // Vercel: API ada di /api/...
         let email = '';
-        let autoOn = true;
-        let tick = 10;
-        let tickT = null;
-        const CIRC = 2 * Math.PI * 9;   // r=9 → C≈56.5
 
         // ─── INIT ─────────────────────────────────────────────────────────────────────
         window.addEventListener('DOMContentLoaded', () => {
             const saved = localStorage.getItem('tb_email');
             if (saved) { setEmail(saved); doRefresh(); }
-            startTick();
 
             document.getElementById('cust-in').addEventListener('keydown', e => {
                 if (e.key === 'Enter') doCustom();
@@ -1049,7 +986,6 @@
             }
 
             btn.textContent = 'Refresh';
-            resetTick();
         }
 
         // ─── RENDER ───────────────────────────────────────────────────────────────────
@@ -1063,7 +999,7 @@
                 list.innerHTML = `<div class="istate">
             <div class="istate-glyph">○</div>
             <div class="istate-t">Belum ada pesan</div>
-            <div class="istate-s">Inbox diperbarui otomatis setiap 10 detik.</div>
+            <div class="istate-s">Inbox diperbarui saat Anda menekan tombol refresh.</div>
         </div>`;
                 return;
             }
@@ -1100,44 +1036,6 @@
             b.classList.toggle('open', o);
         }
 
-        // ─── AUTO REFRESH (countdown ring) ───────────────────────────────────────────
-        function startTick() { resetTick(); }
-
-        function resetTick() {
-            tick = 10;
-            if (tickT) clearInterval(tickT);
-            const prog = document.getElementById('ring-prog');
-            const lbl = document.getElementById('ring-lbl');
-            prog.style.strokeDashoffset = 0;
-
-            if (!autoOn) return;
-
-            tickT = setInterval(() => {
-                tick--;
-                lbl.textContent = tick + 's';
-                prog.style.strokeDashoffset = CIRC * (1 - tick / 10);
-                if (tick <= 0) {
-                    clearInterval(tickT);
-                    if (email) doRefresh();
-                    else resetTick();
-                }
-            }, 1000);
-        }
-
-        function toggleAuto() {
-            autoOn = !autoOn;
-            const prog = document.getElementById('ring-prog');
-            const lbl = document.getElementById('ring-lbl');
-            if (!autoOn) {
-                clearInterval(tickT);
-                prog.classList.add('paused');
-                lbl.textContent = '‖';
-            } else {
-                prog.classList.remove('paused');
-                resetTick();
-            }
-        }
-
         // ─── HELPERS ─────────────────────────────────────────────────────────────────
         function setEmail(em) {
             email = em;
@@ -1152,7 +1050,6 @@
                 const row = document.getElementById('uprow');
                 row.classList.add('show');
 
-                // Logika konversi menit ke jam
                 let uptimeStr = '';
                 const mins = parseInt(uptime);
                 if (mins >= 60) {
@@ -1216,7 +1113,7 @@
         <div class="istate">
             <div class="istate-glyph">∅</div>
             <div class="istate-t">Inbox kosong</div>
-            <div class="istate-s">Generate email dulu, lalu tunggu pesan masuk.</div>
+            <div class="istate-s">Klik refresh manual untuk mengecek pesan masuk.</div>
         </div>`;
         }
 
