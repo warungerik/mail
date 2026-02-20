@@ -1151,11 +1151,22 @@
             if (uptime) {
                 const row = document.getElementById('uprow');
                 row.classList.add('show');
-                document.getElementById('uptext').textContent = 'Uptime: ' + uptime + ' menit';
+
+                // Logika konversi menit ke jam
+                let uptimeStr = '';
+                const mins = parseInt(uptime);
+                if (mins >= 60) {
+                    const h = Math.floor(mins / 60);
+                    const m = mins % 60;
+                    uptimeStr = `${h}j ${m}m`;
+                } else {
+                    uptimeStr = `${mins}m`;
+                }
+
+                document.getElementById('uptext').textContent = 'Uptime: ' + uptimeStr;
                 document.getElementById('upstatus').textContent = status || '—';
             }
         }
-
         function setChip(cls, txt) {
             document.getElementById('cdot').className = 'cdot ' + cls;
             document.getElementById('ctext').textContent = txt;
