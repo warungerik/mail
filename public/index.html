@@ -149,10 +149,6 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .tabs-container::-webkit-scrollbar {
-            height: 2px;
-        }
-
         .email-tab {
             padding: 8px 14px;
             background: var(--cream);
@@ -184,10 +180,6 @@
             cursor: pointer;
             opacity: 0.5;
             padding: 0 2px;
-        }
-
-        .email-tab button:hover {
-            opacity: 1;
         }
 
         .panel {
@@ -269,16 +261,6 @@
             color: var(--ink3);
         }
 
-        .ibtn:hover {
-            background: var(--paper3);
-            color: var(--ink);
-        }
-
-        .ibtn.ok {
-            color: var(--green);
-            border-color: var(--green-br);
-        }
-
         .btn {
             display: inline-flex;
             align-items: center;
@@ -304,11 +286,6 @@
             transform: translateY(-1px);
         }
 
-        .btn-main:disabled {
-            background: var(--ink4);
-            cursor: not-allowed;
-        }
-
         .btn-ghost {
             background: var(--paper2);
             color: var(--ink2);
@@ -322,11 +299,6 @@
             padding: 14px 22px;
             border-bottom: 1px solid var(--line);
             background: var(--paper);
-        }
-
-        .inbox-title {
-            font-family: var(--serif);
-            font-size: 17px;
         }
 
         .mbadge {
@@ -376,18 +348,6 @@
             color: var(--amber);
         }
 
-        .msubj {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .mmeta {
-            font-family: var(--mono);
-            font-size: 10.5px;
-            color: var(--ink3);
-        }
-
         .mbody {
             display: none;
             padding: 14px 16px;
@@ -400,6 +360,52 @@
 
         .mbody.open {
             display: block;
+        }
+
+        /* ── MODALS & TOAST ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(28, 22, 18, 0.4);
+            backdrop-filter: blur(2px);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .modal-card {
+            background: var(--cream);
+            padding: 24px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid var(--line);
+            transform: translateY(10px);
+            transition: transform 0.2s;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--ink);
+            color: var(--paper);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 500;
+            z-index: 10000;
+            transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
         }
 
         @keyframes fadeUp {
@@ -417,10 +423,6 @@
         @media (max-width: 500px) {
             .counter-wrap {
                 display: none;
-            }
-
-            .topbar-link {
-                font-size: 11px;
             }
         }
     </style>
@@ -470,7 +472,7 @@
         <div class="panel">
             <div class="inbox-head">
                 <div style="display:flex; align-items:center; gap:10px">
-                    <span class="inbox-title">Inbox</span>
+                    <span style="font-family:var(--serif); font-size:17px;">Inbox</span>
                     <span class="mbadge" id="mbadge">0 pesan</span>
                 </div>
                 <button class="btn btn-ghost" id="btn-ref" onclick="doRefresh()"
@@ -486,15 +488,15 @@
         </div>
     </main>
 
-    <div id="custom-alert"
-        style="display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,0.3); backdrop-filter:blur(2px); opacity:0; transition:opacity 0.2s">
-        <div
-            style="background:var(--cream); padding:24px; border-radius:12px; max-width:400px; width:100%; border:1px solid var(--line)">
-            <div id="alert-title" style="font-family:var(--serif); font-size:20px; margin-bottom:8px"></div>
-            <div id="alert-msg" style="font-size:14px; color:var(--ink2); margin-bottom:20px"></div>
-            <button onclick="closeAlert()" class="btn btn-main" style="width:100%">Oke</button>
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-card">
+            <div id="modal-title" style="font-family:var(--serif); font-size:20px; margin-bottom:8px"></div>
+            <div id="modal-msg" style="font-size:14px; color:var(--ink2); margin-bottom:20px; line-height:1.5"></div>
+            <div id="modal-actions" style="display:flex; gap:8px;"></div>
         </div>
     </div>
+
+    <div id="toast" class="toast">Email berhasil disalin!</div>
 
     <script>
         let emails = [];
@@ -515,7 +517,7 @@
             emails.forEach((em, i) => {
                 const tab = document.createElement('div');
                 tab.className = `email-tab ${i === activeIdx ? 'active' : ''}`;
-                tab.innerHTML = `<span>${em.address.split('@')[0]}</span><button onclick="removeEmail(${i}, event)">✕</button>`;
+                tab.innerHTML = `<span>${em.address.split('@')[0]}</span><button onclick="confirmRemove(${i}, event)">✕</button>`;
                 tab.onclick = () => selectEmail(i);
                 container.appendChild(tab);
             });
@@ -527,11 +529,9 @@
             activeIdx = idx;
             const current = emails[idx];
             if (!current) return;
-
             document.getElementById('email-val').textContent = current.address;
             document.getElementById('email-val').classList.remove('ph');
             document.getElementById('mbadge').textContent = (current.inbox?.length || 0) + ' pesan';
-
             applyMeta(current.status, current.uptime);
             renderMsgs(current.inbox || []);
             renderTabs();
@@ -549,7 +549,7 @@
                     saveData();
                     selectEmail(emails.length - 1);
                 }
-            } catch (e) { showAlert('Gagal koneksi server'); }
+            } catch (e) { showModal('Error', 'Gagal koneksi server'); }
             btn.innerHTML = 'Generate Email Baru';
         }
 
@@ -567,12 +567,19 @@
                     saveData();
                     selectEmail(activeIdx);
                 }
-            } catch (e) { showAlert('Refresh gagal'); }
-            btn.textContent = 'Refresh Manual';
+            } catch (e) { showModal('Error', 'Refresh gagal'); }
+            btn.textContent = 'Refresh';
         }
 
-        function removeEmail(idx, e) {
+        function confirmRemove(idx, e) {
             e.stopPropagation();
+            showModal('Hapus Email?', `Apakah Anda yakin ingin menghapus <b>${emails[idx].address}</b>? Sesi inbox akan hilang.`, [
+                { label: 'Batal', type: 'ghost', action: closeModal },
+                { label: 'Hapus', type: 'main', action: () => { removeEmail(idx); closeModal(); }, style: 'background:var(--red)' }
+            ]);
+        }
+
+        function removeEmail(idx) {
             emails.splice(idx, 1);
             activeIdx = emails.length > 0 ? 0 : -1;
             saveData();
@@ -590,16 +597,7 @@
             msgs.forEach(m => {
                 const card = document.createElement('div');
                 card.className = 'mcard';
-                card.innerHTML = `
-                    <div class="mtop" onclick="this.nextElementSibling.classList.toggle('open')">
-                        <div class="mavatar">${(m.from || '?')[0].toUpperCase()}</div>
-                        <div style="flex:1">
-                            <div class="msubj">${esc(m.subject)}</div>
-                            <div class="mmeta">${esc(m.from)}</div>
-                        </div>
-                    </div>
-                    <div class="mbody">${esc(m.message)}</div>
-                `;
+                card.innerHTML = `<div class="mtop" onclick="this.nextElementSibling.classList.toggle('open')"><div class="mavatar">${(m.from || '?')[0].toUpperCase()}</div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">${esc(m.subject)}</div><div style="font-family:var(--mono);font-size:10.5px;color:var(--ink3)">${esc(m.from)}</div></div></div><div class="mbody">${esc(m.message)}</div>`;
                 list.appendChild(card);
             });
         }
@@ -617,24 +615,41 @@
         }
 
         function saveData() { localStorage.setItem('tb_emails', JSON.stringify(emails)); }
+
         function copyEmail() {
             const txt = document.getElementById('email-val').textContent;
             if (!txt || txt.includes('Klik')) return;
             navigator.clipboard.writeText(txt);
-            const btn = document.getElementById('btn-copy');
-            btn.textContent = '✓'; btn.classList.add('ok');
-            setTimeout(() => { btn.textContent = '⎘'; btn.classList.remove('ok'); }, 2000);
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
         }
+
         function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-        function showAlert(msg, title = 'Info') {
-            const m = document.getElementById('custom-alert');
-            document.getElementById('alert-title').textContent = title;
-            document.getElementById('alert-msg').textContent = msg;
-            m.style.display = 'flex'; setTimeout(() => m.style.opacity = '1', 10);
+
+        function showModal(title, msg, actions = [{ label: 'Oke', type: 'main', action: closeModal }]) {
+            const overlay = document.getElementById('modal-overlay');
+            document.getElementById('modal-title').innerHTML = title;
+            document.getElementById('modal-msg').innerHTML = msg;
+            const actionContainer = document.getElementById('modal-actions');
+            actionContainer.innerHTML = '';
+            actions.forEach(btn => {
+                const b = document.createElement('button');
+                b.className = `btn btn-${btn.type}`;
+                b.textContent = btn.label;
+                if (btn.style) b.style = btn.style;
+                b.onclick = btn.action;
+                actionContainer.appendChild(b);
+            });
+            overlay.style.display = 'flex';
+            setTimeout(() => { overlay.style.opacity = '1'; overlay.firstElementChild.style.transform = 'translateY(0)'; }, 10);
         }
-        function closeAlert() {
-            const m = document.getElementById('custom-alert');
-            m.style.opacity = '0'; setTimeout(() => m.style.display = 'none', 200);
+
+        function closeModal() {
+            const overlay = document.getElementById('modal-overlay');
+            overlay.style.opacity = '0';
+            overlay.firstElementChild.style.transform = 'translateY(10px)';
+            setTimeout(() => overlay.style.display = 'none', 200);
         }
     </script>
 </body>
