@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tempbox — Email Sementara</title>
+    <title>Tempbox — Multi Email</title>
     <meta name="description" content="Generate email sementara gratis. Terima verifikasi tanpa daftar akun.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,18 +44,14 @@
             padding: 0;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: var(--sans);
             background: var(--paper);
             color: var(--ink);
             min-height: 100vh;
+            position: relative;
         }
 
-        /* grain */
         body::before {
             content: '';
             position: fixed;
@@ -66,12 +62,6 @@
             opacity: 0.5;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* ── TOPBAR ── */
         .topbar {
             position: sticky;
             top: 0;
@@ -93,17 +83,10 @@
             justify-content: space-between;
         }
 
-        .logo {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-        }
-
         .logo-word {
             font-family: var(--serif);
             font-size: 19px;
             letter-spacing: -0.02em;
-            color: var(--ink);
         }
 
         .topbar-link {
@@ -113,6 +96,7 @@
             padding: 5px 10px;
             border-radius: 5px;
             transition: all 0.15s;
+            text-decoration: none;
         }
 
         .topbar-link:hover {
@@ -120,14 +104,12 @@
             color: var(--ink);
         }
 
-        /* ── PAGE ── */
         .page {
             max-width: 700px;
             margin: 0 auto;
             padding: 40px 24px 80px;
         }
 
-        /* ── MASTHEAD ── */
         .masthead {
             display: flex;
             align-items: flex-end;
@@ -135,16 +117,6 @@
             gap: 16px;
             margin-bottom: 28px;
             animation: fadeUp 0.5s ease both;
-        }
-
-        .kicker {
-            font-family: var(--mono);
-            font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--amber);
-            margin-bottom: 8px;
         }
 
         .headline {
@@ -167,48 +139,57 @@
             line-height: 1.65;
         }
 
-        .counter-wrap {
-            text-align: right;
-            flex-shrink: 0;
-        }
-
-        .counter-num {
-            font-family: var(--serif);
-            font-size: 44px;
-            line-height: 1;
-            letter-spacing: -0.04em;
-            display: block;
-        }
-
-        .counter-lbl {
-            font-family: var(--mono);
-            font-size: 9px;
-            color: var(--ink3);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        /* ── ALERT / NOTICE ── */
-        .notice {
+        /* ── TABS ── */
+        .tabs-container {
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 11px 14px;
-            background: var(--amber-lt);
-            border: 1px solid var(--amber-br);
-            border-radius: 8px;
+            gap: 8px;
             margin-bottom: 16px;
-            font-size: 12.5px;
-            color: var(--amber);
-            line-height: 1.65;
-            animation: fadeUp 0.5s 0.06s ease both;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .notice b {
-            font-weight: 700;
+        .tabs-container::-webkit-scrollbar {
+            height: 2px;
         }
 
-        /* ── PANEL ── */
+        .email-tab {
+            padding: 8px 14px;
+            background: var(--cream);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-family: var(--mono);
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .email-tab.active {
+            background: var(--amber);
+            color: white;
+            border-color: var(--amber);
+            box-shadow: 0 4px 10px rgba(191, 108, 34, 0.2);
+        }
+
+        .email-tab button {
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 14px;
+            cursor: pointer;
+            opacity: 0.5;
+            padding: 0 2px;
+        }
+
+        .email-tab button:hover {
+            opacity: 1;
+        }
+
         .panel {
             background: var(--cream);
             border: 1px solid var(--line);
@@ -217,28 +198,10 @@
             margin-bottom: 14px;
         }
 
-        .panel.anim-1 {
-            animation: fadeUp 0.5s 0.08s ease both;
-        }
-
-        .panel.anim-2 {
-            animation: fadeUp 0.5s 0.14s ease both;
-        }
-
         .panel-sec {
             padding: 20px 22px;
         }
 
-        .panel-sec+.panel-sec {
-            border-top: 1px solid var(--line);
-        }
-
-        .panel-tight {
-            padding: 13px 22px;
-            border-top: 1px solid var(--line);
-        }
-
-        /* chip label */
         .chip {
             display: inline-flex;
             align-items: center;
@@ -257,22 +220,12 @@
             height: 6px;
             border-radius: 50%;
             background: var(--ink4);
-            flex-shrink: 0;
         }
 
         .cdot.live {
             background: var(--green);
         }
 
-        .cdot.warn {
-            background: var(--amber);
-        }
-
-        .cdot.bad {
-            background: var(--red);
-        }
-
-        /* email display */
         .email-box {
             display: flex;
             align-items: center;
@@ -282,11 +235,6 @@
             border-radius: 8px;
             padding: 12px 14px;
             margin-bottom: 13px;
-            transition: border-color 0.15s;
-        }
-
-        .email-box:hover {
-            border-color: var(--amber-br);
         }
 
         .email-val {
@@ -295,7 +243,6 @@
             font-family: var(--mono);
             font-size: 13.5px;
             font-weight: 500;
-            color: var(--ink);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -306,42 +253,30 @@
             font-family: var(--sans);
             font-size: 13px;
             font-style: italic;
-            font-weight: 400;
         }
 
         .ibtn {
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 6px;
             border: 1px solid var(--line);
             background: var(--cream);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
-            color: var(--ink3);
             cursor: pointer;
             transition: all 0.15s;
-            flex-shrink: 0;
-            user-select: none;
+            color: var(--ink3);
         }
 
         .ibtn:hover {
             background: var(--paper3);
             color: var(--ink);
-            border-color: var(--ink4);
         }
 
         .ibtn.ok {
-            background: var(--green-lt);
             color: var(--green);
             border-color: var(--green-br);
-        }
-
-        /* buttons */
-        .brow {
-            display: flex;
-            gap: 8px;
         }
 
         .btn {
@@ -352,7 +287,6 @@
             padding: 10px 20px;
             border-radius: 7px;
             border: none;
-            font-family: var(--sans);
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
@@ -363,19 +297,15 @@
             flex: 1;
             background: var(--amber);
             color: white;
-            box-shadow: 0 2px 8px rgba(191, 108, 34, 0.2);
         }
 
         .btn-main:hover:not(:disabled) {
             background: #a55d1b;
-            box-shadow: 0 4px 14px rgba(191, 108, 34, 0.3);
             transform: translateY(-1px);
         }
 
         .btn-main:disabled {
             background: var(--ink4);
-            box-shadow: none;
-            transform: none;
             cursor: not-allowed;
         }
 
@@ -385,52 +315,6 @@
             border: 1px solid var(--line);
         }
 
-        .btn-ghost:hover {
-            background: var(--paper3);
-            color: var(--ink);
-        }
-
-        /* custom email row */
-        .cust-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cust-lbl {
-            font-family: var(--mono);
-            font-size: 10px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--ink3);
-            flex-shrink: 0;
-        }
-
-        .cust-input {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid var(--line);
-            border-radius: 7px;
-            background: var(--paper2);
-            font-family: var(--mono);
-            font-size: 12.5px;
-            color: var(--ink);
-            outline: none;
-            transition: all 0.15s;
-        }
-
-        .cust-input::placeholder {
-            color: var(--ink4);
-            font-family: var(--sans);
-            font-size: 12px;
-        }
-
-        .cust-input:focus {
-            border-color: var(--amber-br);
-            box-shadow: 0 0 0 3px var(--amber-lt);
-        }
-
-        /* ── INBOX ── */
         .inbox-head {
             display: flex;
             align-items: center;
@@ -440,16 +324,9 @@
             background: var(--paper);
         }
 
-        .inbox-head-l {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         .inbox-title {
             font-family: var(--serif);
             font-size: 17px;
-            letter-spacing: -0.02em;
         }
 
         .mbadge {
@@ -457,134 +334,34 @@
             font-size: 10px;
             background: var(--amber-lt);
             color: var(--amber);
-            border: 1px solid var(--amber-br);
             padding: 2px 8px;
             border-radius: 4px;
         }
 
-        .inbox-ctrl {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* inbox body */
-        .inbox-body {
+        #msg-list {
             padding: 16px;
         }
 
-        /* uptime row */
-        .uprow {
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 12px;
-            background: var(--paper2);
-            border: 1px solid var(--line);
-            border-radius: 7px;
-            margin-bottom: 12px;
-            font-family: var(--mono);
-            font-size: 10.5px;
-            color: var(--ink3);
-        }
-
-        .uprow.show {
-            display: flex;
-        }
-
-        .uprow-l {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
-
-        /* states */
         .istate {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             padding: 48px 20px;
             text-align: center;
-            gap: 8px;
-        }
-
-        .istate-glyph {
-            font-family: var(--serif);
-            font-size: 52px;
-            line-height: 1;
-            color: var(--ink4);
-            font-style: italic;
-        }
-
-        .istate-t {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--ink2);
-        }
-
-        .istate-s {
-            font-size: 12.5px;
-            color: var(--ink3);
-        }
-
-        .ldots {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 40px;
             color: var(--ink3);
             font-size: 13px;
-        }
-
-        .ldots-anim {
-            display: flex;
-            gap: 4px;
-        }
-
-        .ldots-anim span {
-            width: 5px;
-            height: 5px;
-            background: var(--amber);
-            border-radius: 50%;
-            animation: dotpulse 1.2s infinite;
-        }
-
-        .ldots-anim span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .ldots-anim span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        /* message cards */
-        #msg-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
         }
 
         .mcard {
             background: var(--paper);
             border: 1px solid var(--line);
             border-radius: 8px;
+            margin-bottom: 8px;
             overflow: hidden;
-            transition: border-color 0.15s;
-        }
-
-        .mcard:hover {
-            border-color: var(--amber-br);
         }
 
         .mtop {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
             padding: 13px 16px;
             cursor: pointer;
-            user-select: none;
+            display: flex;
+            gap: 12px;
         }
 
         .mavatar {
@@ -592,63 +369,23 @@
             height: 34px;
             border-radius: 50%;
             background: var(--paper3);
-            border: 1px solid var(--line);
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: var(--serif);
-            font-size: 16px;
-            font-style: italic;
             color: var(--amber);
-            flex-shrink: 0;
-        }
-
-        .minfo {
-            flex: 1;
-            min-width: 0;
         }
 
         .msubj {
             font-size: 13px;
             font-weight: 600;
-            color: var(--ink);
-            margin-bottom: 4px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            margin-bottom: 2px;
         }
 
         .mmeta {
             font-family: var(--mono);
             font-size: 10.5px;
             color: var(--ink3);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .mright {
-            text-align: right;
-            flex-shrink: 0;
-        }
-
-        .mtime {
-            font-family: var(--mono);
-            font-size: 10px;
-            color: var(--ink4);
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .mchev {
-            font-size: 9px;
-            color: var(--ink4);
-            display: inline-block;
-            transition: transform 0.2s;
-        }
-
-        .mcard.open .mchev {
-            transform: rotate(180deg);
         }
 
         .mbody {
@@ -657,19 +394,14 @@
             border-top: 1px solid var(--line);
             font-family: var(--mono);
             font-size: 12.5px;
-            color: var(--ink2);
-            line-height: 1.8;
-            white-space: pre-wrap;
-            word-break: break-word;
             background: var(--paper2);
+            white-space: pre-wrap;
         }
 
         .mbody.open {
             display: block;
-            animation: fadeDown 0.2s ease;
         }
 
-        /* ── ANIMATIONS ── */
         @keyframes fadeUp {
             from {
                 opacity: 0;
@@ -682,56 +414,13 @@
             }
         }
 
-        @keyframes fadeDown {
-            from {
-                opacity: 0;
-                transform: translateY(-6px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes dotpulse {
-
-            0%,
-            80%,
-            100% {
-                transform: scale(0.5);
-                opacity: 0.3;
-            }
-
-            40% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        /* ── RESPONSIVE ── */
         @media (max-width: 500px) {
-            .page {
-                padding: 24px 14px 60px;
-            }
-
-            .masthead {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
             .counter-wrap {
                 display: none;
             }
 
-            .cust-lbl {
-                display: none;
-            }
-
-            /* Perbaikan agar Docs tetap muncul di HP */
             .topbar-link {
                 font-size: 11px;
-                padding: 4px 8px;
             }
         }
     </style>
@@ -741,394 +430,211 @@
 
     <header class="topbar">
         <div class="topbar-inner">
-            <div class="logo">
-                <span class="logo-word">Tempbox</span>
-            </div>
+            <div class="logo"><span class="logo-word">Tempbox</span></div>
             <a href="/docs.html" class="topbar-link">Docs</a>
         </div>
     </header>
 
     <main class="page">
-
         <div class="masthead">
             <div>
-                <div class="kicker">Tempbox Email</div>
-                <h1 class="headline">Email <em>sekali pakai,</em><br>tanpa registrasi.</h1>
-                <p class="sub">Generate email sementara, terima verifikasi, buang. Privasi terjaga, gratis selamanya.
-                </p>
+                <h1 class="headline">Email <em>multi-sesi,</em><br>sekali klik.</h1>
+                <p class="sub">Gratis dan privasi aman.</p>
             </div>
-            <div class="counter-wrap">
-                <span class="counter-num" id="stat-count">0</span>
-                <span class="counter-lbl">pesan diterima</span>
+            <div class="counter-wrap" style="text-align:right">
+                <span id="stat-count"
+                    style="font-family:var(--serif); font-size:44px; display:block; line-height:1">0</span>
+                <span style="font-family:var(--mono); font-size:9px; color:var(--ink3); text-transform:uppercase">total
+                    pesan</span>
             </div>
         </div>
 
-        <div class="notice">
-            &nbsp;<div>Powered by <b>WARUNGERIK</b></div>
-        </div>
+        <div id="email-tabs" class="tabs-container"></div>
 
-        <div class="panel anim-1">
+        <div class="panel">
             <div class="panel-sec">
                 <div class="chip">
                     <div class="cdot" id="cdot"></div>
                     <span id="ctext">Belum aktif</span>
                 </div>
-
                 <div class="email-box">
-                    <span class="email-val ph" id="email-val">Klik Generate untuk membuat email...</span>
-                    <button class="ibtn" id="btn-copy" onclick="copyEmail()" title="Salin">⎘</button>
-                    <button class="ibtn" id="btn-del" onclick="clearSess()" title="Hapus sesi">✕</button>
+                    <span class="email-val ph" id="email-val">Klik Generate untuk mulai...</span>
+                    <button class="ibtn" onclick="copyEmail()" id="btn-copy">⎘</button>
                 </div>
-
                 <div class="brow">
-                    <button class="btn btn-main" id="btn-gen" onclick="doGenerate()">
-                        &nbsp;Generate Email Baru
-                    </button>
-                </div>
-            </div>
-
-            <div class="panel-tight">
-                <div class="cust-row">
-                    <span class="cust-lbl">Custom:</span>
-                    <input class="cust-input" id="cust-in" type="text"
-                        placeholder="Masukkan email kustom lalu Enter...">
-                    <button class="btn btn-ghost" onclick="doCustom()"
-                        style="padding:8px 14px;font-size:12px;flex-shrink:0">Cek</button>
+                    <button class="btn btn-main" id="btn-gen" onclick="doGenerate()">Generate Email Baru</button>
                 </div>
             </div>
         </div>
 
-        <div class="panel anim-2">
+        <div class="panel">
             <div class="inbox-head">
-                <div class="inbox-head-l">
+                <div style="display:flex; align-items:center; gap:10px">
                     <span class="inbox-title">Inbox</span>
                     <span class="mbadge" id="mbadge">0 pesan</span>
                 </div>
-                <div class="inbox-ctrl">
-                    <button class="btn btn-ghost" id="btn-ref" onclick="doRefresh()"
-                        style="padding:7px 13px;font-size:12px;">Refresh</button>
-                </div>
+                <button class="btn btn-ghost" id="btn-ref" onclick="doRefresh()"
+                    style="padding:7px 13px; font-size:12px">Refresh Manual</button>
             </div>
-
-            <div class="inbox-body">
-                <div class="uprow" id="uprow">
-                    <div class="uprow-l">
-                        <div class="cdot live"></div>
-                        <span id="uptext">—</span>
-                    </div>
-                    <span id="upstatus">—</span>
-                </div>
-
-                <div id="msg-list">
-                    <div class="istate">
-                        <div class="istate-glyph">∅</div>
-                        <div class="istate-t">Inbox kosong</div>
-                        <div class="istate-s">Klik refresh manual untuk mengecek pesan masuk.</div>
-                    </div>
-                </div>
+            <div id="uprow"
+                style="display:none; padding:8px 22px; background:var(--paper2); font-size:11px; color:var(--ink3); border-bottom:1px solid var(--line)">
+                <span id="uptext"></span>
+            </div>
+            <div id="msg-list">
+                <div class="istate">Silakan pilih atau generate email untuk melihat inbox.</div>
             </div>
         </div>
-
     </main>
 
     <div id="custom-alert"
-        style="display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; padding:20px; background:rgba(28,22,18,0.4); backdrop-filter:blur(2px); opacity:0; transition:opacity 0.2s ease;">
-        <div style="background:var(--cream); border:1px solid var(--line); border-radius:12px; max-width:400px; width:100%; padding:24px; box-shadow:0 20px 40px rgba(0,0,0,0.1); transform:translateY(20px); transition:transform 0.2s ease;"
-            id="alert-card">
-            <div style="font-family:var(--serif); font-size:20px; margin-bottom:8px; color:var(--ink);"
-                id="alert-title">
-                Perhatian</div>
-            <div style="font-size:14px; color:var(--ink2); line-height:1.6; margin-bottom:20px;" id="alert-msg">Pesan di
-                sini...</div>
-            <div style="display:flex; justify-content:flex-end; gap:8px;">
-                <button onclick="closeAlert()" class="btn btn-main" style="flex:none; padding:8px 20px;">Oke</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="custom-confirm"
-        style="display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; padding:20px; background:rgba(28,22,18,0.4); backdrop-filter:blur(2px); opacity:0; transition:opacity 0.2s ease;">
-        <div style="background:var(--cream); border:1px solid var(--line); border-radius:12px; max-width:400px; width:100%; padding:24px; box-shadow:0 20px 40px rgba(0,0,0,0.1); transform:translateY(20px); transition:transform 0.2s ease;"
-            id="confirm-card">
-            <div style="font-family:var(--serif); font-size:20px; margin-bottom:8px; color:var(--ink);">Konfirmasi</div>
-            <div style="font-size:14px; color:var(--ink2); line-height:1.6; margin-bottom:20px;" id="confirm-msg">Apakah
-                Anda yakin?</div>
-            <div style="display:flex; justify-content:flex-end; gap:8px;">
-                <button onclick="closeConfirm(false)" class="btn btn-ghost"
-                    style="flex:none; padding:8px 20px;">Batal</button>
-                <button onclick="closeConfirm(true)" class="btn btn-main"
-                    style="flex:none; padding:8px 20px; background:var(--red);">Hapus</button>
-            </div>
+        style="display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,0.3); backdrop-filter:blur(2px); opacity:0; transition:opacity 0.2s">
+        <div
+            style="background:var(--cream); padding:24px; border-radius:12px; max-width:400px; width:100%; border:1px solid var(--line)">
+            <div id="alert-title" style="font-family:var(--serif); font-size:20px; margin-bottom:8px"></div>
+            <div id="alert-msg" style="font-size:14px; color:var(--ink2); margin-bottom:20px"></div>
+            <button onclick="closeAlert()" class="btn btn-main" style="width:100%">Oke</button>
         </div>
     </div>
 
     <script>
-        // ─── STATE ────────────────────────────────────────────────────────────────────
-        const BASE = '';   // Vercel: API ada di /api/...
-        let email = '';
+        let emails = [];
+        let activeIdx = -1;
 
-        // ─── INIT ─────────────────────────────────────────────────────────────────────
         window.addEventListener('DOMContentLoaded', () => {
-            const saved = localStorage.getItem('tb_email');
-            if (saved) { setEmail(saved); doRefresh(); }
-
-            document.getElementById('cust-in').addEventListener('keydown', e => {
-                if (e.key === 'Enter') doCustom();
-            });
+            const saved = JSON.parse(localStorage.getItem('tb_emails') || '[]');
+            if (saved.length > 0) {
+                emails = saved;
+                renderTabs();
+                selectEmail(0);
+            }
         });
 
-        // ─── MODAL HELPERS ────────────────────────────────────────────────────────────
-        function showAlert(msg, title = 'Perhatian') {
-            const modal = document.getElementById('custom-alert');
-            const card = document.getElementById('alert-card');
-            document.getElementById('alert-msg').textContent = msg;
-            document.getElementById('alert-title').textContent = title;
-
-            modal.style.display = 'flex';
-            setTimeout(() => {
-                modal.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, 10);
-        }
-
-        function closeAlert() {
-            const modal = document.getElementById('custom-alert');
-            modal.style.opacity = '0';
-            document.getElementById('alert-card').style.transform = 'translateY(20px)';
-            setTimeout(() => { modal.style.display = 'none'; }, 200);
-        }
-
-        let confirmResolve;
-        function showConfirm(msg) {
-            const modal = document.getElementById('custom-confirm');
-            const card = document.getElementById('confirm-card');
-            document.getElementById('confirm-msg').textContent = msg;
-
-            modal.style.display = 'flex';
-            setTimeout(() => {
-                modal.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, 10);
-
-            return new Promise((resolve) => {
-                confirmResolve = resolve;
+        function renderTabs() {
+            const container = document.getElementById('email-tabs');
+            container.innerHTML = '';
+            emails.forEach((em, i) => {
+                const tab = document.createElement('div');
+                tab.className = `email-tab ${i === activeIdx ? 'active' : ''}`;
+                tab.innerHTML = `<span>${em.address.split('@')[0]}</span><button onclick="removeEmail(${i}, event)">✕</button>`;
+                tab.onclick = () => selectEmail(i);
+                container.appendChild(tab);
             });
+            document.getElementById('btn-gen').disabled = emails.length >= 5;
+            document.getElementById('stat-count').textContent = emails.reduce((acc, curr) => acc + (curr.inbox?.length || 0), 0);
         }
 
-        function closeConfirm(val) {
-            const modal = document.getElementById('custom-confirm');
-            modal.style.opacity = '0';
-            document.getElementById('confirm-card').style.transform = 'translateY(20px)';
-            setTimeout(() => {
-                modal.style.display = 'none';
-                confirmResolve(val);
-            }, 200);
+        function selectEmail(idx) {
+            activeIdx = idx;
+            const current = emails[idx];
+            if (!current) return;
+
+            document.getElementById('email-val').textContent = current.address;
+            document.getElementById('email-val').classList.remove('ph');
+            document.getElementById('mbadge').textContent = (current.inbox?.length || 0) + ' pesan';
+
+            applyMeta(current.status, current.uptime);
+            renderMsgs(current.inbox || []);
+            renderTabs();
         }
 
-        // ─── API CALLS ────────────────────────────────────────────────────────────────
         async function doGenerate() {
+            if (emails.length >= 5) return;
             const btn = document.getElementById('btn-gen');
-            btn.disabled = true;
-            btn.textContent = 'Generating…';
-
+            btn.textContent = 'Generating...';
             try {
-                const r = await fetch(`${BASE}/api/generate`);
+                const r = await fetch('/api/generate');
                 const d = await r.json();
-                if (d.success && d.result?.email) {
-                    setEmail(d.result.email);
-                    localStorage.setItem('tb_email', d.result.email);
-                    applyMeta(d.result.emailStatus, d.result.uptime);
-                    await doRefresh();
-                } else {
-                    setChip('bad', 'Gagal: ' + (d.result || 'coba lagi'));
+                if (d.success) {
+                    emails.push({ address: d.result.email, status: d.result.emailStatus, uptime: d.result.uptime, inbox: [] });
+                    saveData();
+                    selectEmail(emails.length - 1);
                 }
-            } catch (e) { setChip('bad', 'Error koneksi'); }
-
-            btn.disabled = false;
-            btn.innerHTML = '&nbsp;Generate Email Baru';
-        }
-
-        async function doCustom() {
-            const val = document.getElementById('cust-in').value.trim();
-            if (!val || !val.includes('@')) {
-                showAlert('Masukkan email valid (contoh: nama@domain.com)', 'Email Tidak Valid');
-                return;
-            }
-            setEmail(val);
-            localStorage.setItem('tb_email', val);
-            document.getElementById('cust-in').value = '';
-            try {
-                const r = await fetch(`${BASE}/api/validate?email=${encodeURIComponent(val)}`);
-                const d = await r.json();
-                if (d.success && d.result) applyMeta(d.result.emailStatus, d.result.uptime);
-            } catch (_) { }
-            await doRefresh();
+            } catch (e) { showAlert('Gagal koneksi server'); }
+            btn.innerHTML = 'Generate Email Baru';
         }
 
         async function doRefresh() {
-            if (!email) return;
-
+            if (activeIdx === -1) return;
             const btn = document.getElementById('btn-ref');
-            btn.textContent = '…';
-            showLoad();
-
+            btn.textContent = 'Updating...';
             try {
-                const r = await fetch(`${BASE}/api/inbox?email=${encodeURIComponent(email)}`);
+                const r = await fetch(`/api/inbox?email=${encodeURIComponent(emails[activeIdx].address)}`);
                 const d = await r.json();
-                if (d.success && d.result) {
-                    applyMeta(d.result.emailStatus, d.result.uptime);
-                    renderMsgs(d.result.inbox || []);
-                } else {
-                    showErr('Gagal memuat inbox.');
+                if (d.success) {
+                    emails[activeIdx].inbox = d.result.inbox || [];
+                    emails[activeIdx].status = d.result.emailStatus;
+                    emails[activeIdx].uptime = d.result.uptime;
+                    saveData();
+                    selectEmail(activeIdx);
                 }
-            } catch (e) {
-                showErr('Error: ' + e.message);
-            }
-
-            btn.textContent = 'Refresh';
+            } catch (e) { showAlert('Refresh gagal'); }
+            btn.textContent = 'Refresh Manual';
         }
 
-        // ─── RENDER ───────────────────────────────────────────────────────────────────
+        function removeEmail(idx, e) {
+            e.stopPropagation();
+            emails.splice(idx, 1);
+            activeIdx = emails.length > 0 ? 0 : -1;
+            saveData();
+            if (activeIdx !== -1) selectEmail(0);
+            else location.reload();
+        }
+
         function renderMsgs(msgs) {
             const list = document.getElementById('msg-list');
-            const badge = document.getElementById('mbadge');
-            badge.textContent = msgs.length + ' pesan';
-            document.getElementById('stat-count').textContent = msgs.length;
-
-            if (!msgs.length) {
-                list.innerHTML = `<div class="istate">
-            <div class="istate-glyph">○</div>
-            <div class="istate-t">Belum ada pesan</div>
-            <div class="istate-s">Inbox diperbarui saat Anda menekan tombol refresh.</div>
-        </div>`;
+            if (msgs.length === 0) {
+                list.innerHTML = '<div class="istate">Belum ada pesan masuk.</div>';
                 return;
             }
-
             list.innerHTML = '';
-            msgs.forEach((msg, i) => {
-                const ini = ((msg.from || '?').match(/[a-zA-Z]/) ? msg.from.match(/[a-zA-Z]/)[0] : '?').toUpperCase();
-                const time = msg.created ? fmtDate(msg.created) : '';
+            msgs.forEach(m => {
                 const card = document.createElement('div');
                 card.className = 'mcard';
-                card.style.animation = `fadeUp 0.25s ease ${i * 0.06}s both`;
                 card.innerHTML = `
-            <div class="mtop" onclick="toggleMsg(this)">
-                <div class="mavatar">${esc(ini)}</div>
-                <div class="minfo">
-                    <div class="msubj">${esc(msg.subject || '(Tanpa Subjek)')}</div>
-                    <div class="mmeta">${esc(msg.from || 'unknown')}${msg.to ? ' → ' + esc(msg.to) : ''}</div>
-                </div>
-                <div class="mright">
-                    <span class="mtime">${esc(time)}</span>
-                    <span class="mchev">▾</span>
-                </div>
-            </div>
-            <div class="mbody">${esc(msg.message || '(pesan kosong)')}</div>
-        `;
+                    <div class="mtop" onclick="this.nextElementSibling.classList.toggle('open')">
+                        <div class="mavatar">${(m.from || '?')[0].toUpperCase()}</div>
+                        <div style="flex:1">
+                            <div class="msubj">${esc(m.subject)}</div>
+                            <div class="mmeta">${esc(m.from)}</div>
+                        </div>
+                    </div>
+                    <div class="mbody">${esc(m.message)}</div>
+                `;
                 list.appendChild(card);
             });
         }
 
-        function toggleMsg(h) {
-            const c = h.parentElement;
-            const b = c.querySelector('.mbody');
-            const o = c.classList.toggle('open');
-            b.classList.toggle('open', o);
-        }
-
-        // ─── HELPERS ─────────────────────────────────────────────────────────────────
-        function setEmail(em) {
-            email = em;
-            const el = document.getElementById('email-val');
-            el.textContent = em;
-            el.classList.remove('ph');
-        }
-
         function applyMeta(status, uptime) {
-            if (status) setChip(status === 'good' ? 'live' : 'warn', status === 'good' ? 'Aktif' : status);
+            document.getElementById('cdot').className = 'cdot ' + (status === 'good' ? 'live' : '');
+            document.getElementById('ctext').textContent = status === 'good' ? 'Aktif' : 'Status: ' + status;
+            const upRow = document.getElementById('uprow');
             if (uptime) {
-                const row = document.getElementById('uprow');
-                row.classList.add('show');
-
-                let uptimeStr = '';
-                const mins = parseInt(uptime);
-                if (mins >= 60) {
-                    const h = Math.floor(mins / 60);
-                    const m = mins % 60;
-                    uptimeStr = `${h}j ${m}m`;
-                } else {
-                    uptimeStr = `${mins}m`;
-                }
-
-                document.getElementById('uptext').textContent = 'Uptime: ' + uptimeStr;
-                document.getElementById('upstatus').textContent = status || '—';
+                upRow.style.display = 'block';
+                const h = Math.floor(uptime / 60);
+                const m = uptime % 60;
+                document.getElementById('uptext').textContent = `Domain Uptime: ${h > 0 ? h + 'j ' : ''}${m}m`;
             }
         }
-        function setChip(cls, txt) {
-            document.getElementById('cdot').className = 'cdot ' + cls;
-            document.getElementById('ctext').textContent = txt;
-        }
 
-        function showLoad() {
-            document.getElementById('msg-list').innerHTML = `
-        <div class="ldots">
-            <div class="ldots-anim"><span></span><span></span><span></span></div>
-            mengambil pesan…
-        </div>`;
-        }
-
-        function showErr(msg) {
-            document.getElementById('msg-list').innerHTML = `
-        <div class="istate">
-            <div class="istate-glyph" style="color:var(--red)">!</div>
-            <div class="istate-t">Terjadi kesalahan</div>
-            <div class="istate-s">${esc(msg)}</div>
-        </div>`;
-        }
-
+        function saveData() { localStorage.setItem('tb_emails', JSON.stringify(emails)); }
         function copyEmail() {
-            if (!email) return;
+            const txt = document.getElementById('email-val').textContent;
+            if (!txt || txt.includes('Klik')) return;
+            navigator.clipboard.writeText(txt);
             const btn = document.getElementById('btn-copy');
-            navigator.clipboard.writeText(email).then(() => {
-                btn.classList.add('ok'); btn.textContent = '✓';
-                setTimeout(() => { btn.classList.remove('ok'); btn.textContent = '⎘'; }, 2000);
-            });
+            btn.textContent = '✓'; btn.classList.add('ok');
+            setTimeout(() => { btn.textContent = '⎘'; btn.classList.remove('ok'); }, 2000);
         }
-
-        async function clearSess() {
-            const yakin = await showConfirm('Hapus email sesi ini? Semua pesan akan hilang.');
-            if (!yakin) return;
-
-            email = '';
-            localStorage.removeItem('tb_email');
-            const el = document.getElementById('email-val');
-            el.textContent = 'Klik Generate untuk membuat email...';
-            el.classList.add('ph');
-            setChip('', 'Belum aktif');
-            document.getElementById('cdot').className = 'cdot';
-            document.getElementById('uprow').classList.remove('show');
-            document.getElementById('mbadge').textContent = '0 pesan';
-            document.getElementById('stat-count').textContent = '0';
-            document.getElementById('msg-list').innerHTML = `
-        <div class="istate">
-            <div class="istate-glyph">∅</div>
-            <div class="istate-t">Inbox kosong</div>
-            <div class="istate-s">Klik refresh manual untuk mengecek pesan masuk.</div>
-        </div>`;
+        function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+        function showAlert(msg, title = 'Info') {
+            const m = document.getElementById('custom-alert');
+            document.getElementById('alert-title').textContent = title;
+            document.getElementById('alert-msg').textContent = msg;
+            m.style.display = 'flex'; setTimeout(() => m.style.opacity = '1', 10);
         }
-
-        function fmtDate(s) {
-            try {
-                const d = new Date(s.replace(' ', 'T'));
-                return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }) + ' ' +
-                    d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-            } catch { return s; }
-        }
-
-        function esc(s) {
-            const d = document.createElement('div');
-            d.textContent = String(s ?? '');
-            return d.innerHTML;
+        function closeAlert() {
+            const m = document.getElementById('custom-alert');
+            m.style.opacity = '0'; setTimeout(() => m.style.display = 'none', 200);
         }
     </script>
 </body>
